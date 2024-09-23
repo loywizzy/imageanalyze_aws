@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Upload Image</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-white dark:bg-gray-900">
+    <nav class="bg-white border-gray-200 dark:bg-gray-900">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <img src="https://i.ibb.co/ygZWw9F/logo.png" class="h-9" alt="Logo" />
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ImageLnw</span>
+            </a>
+            <button data-collapse-toggle="navbar-default" type="button"
+                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                aria-controls="navbar-default" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M1 1h15M1 7h15M1 13h15" />
+                </svg>
+            </button>
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul
+                    class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <li>
+                        <a href="/"
+                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent  md:dark:text-blue-500">Image Analysis</a>
+                    </li>
+                    <li>
+                        <a href="/detect_text"
+                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                            aria-current="page">Detect Text</a>
+                    </li>
+                    <li>
+                        <a href="/service"
+                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="bg-white dark:bg-gray-800">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
+            <h1
+                class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+                Upload Image for Analysis</h1>
+            <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">Select or
+                drag a picture to analyze images</p>
+
+            <!-- <form method="post" enctype="multipart/form-data" class="max-w-lg mx-auto">
+                <input
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                    aria-describedby="user_avatar_help" id="user_avatar" type="file" name="file">
+                <br>
+                <input type="submit" value="Detect Text"
+                    class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+            </form> -->
+
+            <form method="post" enctype="multipart/form-data">
+                <input id="upload" type="file" class="hidden" name="file" />
+                <div class="max-w-sm mx-auto bg-white rounded-lg shadow-md overflow-hidden items-center">
+                    <div class="px-4 py-6">
+                        <div id="image-preview"
+                            class="max-w-sm p-6 mb-4 bg-gray-100 border-dashed border-2 border-gray-400 rounded-lg items-center mx-auto text-center cursor-pointer">
+                            <label for="upload" class="cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-gray-700 mx-auto mb-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                                </svg>
+                                <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-700">Upload picture</h5>
+                                <p class="font-normal text-sm text-gray-400 md:px-6">Choose photo size should be less
+                                    than <b class="text-gray-600">2mb</b></p>
+                                <p class="font-normal text-sm text-gray-400 md:px-6">and should be in <b
+                                        class="text-gray-600">JPG or </b> format.</p>
+                                <span id="filename" class="text-gray-500 bg-gray-200 z-50"></span>
+                            </label>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <div class="w-full">
+                                <input type="submit" value="Upload"
+                                    class="w-full text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 flex items-center justify-center mr-2 mb-2 cursor-pointer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <br>
+    </section>
+
+    <!-- <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
+                <form method="post" enctype="multipart/form-data">
+                    <input type="submit" value="Detect Text"
+                        class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                </form>
+
+                </a>
+                <a href="#"
+                    class="py-3 px-5 sm:ms-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-70">
+                    Learn more
+                </a>
+            </div> -->
+
+    <!-- <div class="container px-12">
+        <h1>Upload Image for Text Detection</h1>
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit" value="Detect Text"
+                class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+        </form>
+    </div> -->
+
+
+    <footer class="bg-white rounded-lg shadow m-4 dark:bg-gray-900">
+        <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+            <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400"><p>&copy; 2024 ImageLnw. All Rights Reserved.</p>
+            </span>
+            <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+                <li>
+                    <a href="#" class="hover:underline me-4 md:me-6">About</a>
+                </li>
+                <li>
+                    <a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+                </li>
+                <li>
+                    <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
+                </li>
+                <li>
+                    <a href="#" class="hover:underline">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</body>
+
+</html>
+
+<script>
+    const uploadInput = document.getElementById('upload');
+    const filenameLabel = document.getElementById('filename');
+    const imagePreview = document.getElementById('image-preview');
+
+    // Check if the event listener has been added before
+    let isEventListenerAdded = false;
+
+    uploadInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+
+        if (file) {
+            filenameLabel.textContent = file.name;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                imagePreview.innerHTML =
+                    `<img src="${e.target.result}" class="max-h-48 rounded-lg mx-auto" alt="Image preview" />`;
+                imagePreview.classList.remove('border-dashed', 'border-2', 'border-gray-400');
+
+                // Add event listener for image preview only once
+                if (!isEventListenerAdded) {
+                    imagePreview.addEventListener('click', () => {
+                        uploadInput.click();
+                    });
+
+                    isEventListenerAdded = true;
+                }
+            };
+            reader.readAsDataURL(file);
+        } else {
+            filenameLabel.textContent = '';
+            imagePreview.innerHTML =
+                `<div class="bg-gray-200 h-48 rounded-lg flex items-center justify-center text-gray-500">No image preview</div>`;
+            imagePreview.classList.add('border-dashed', 'border-2', 'border-gray-400');
+
+            // Remove the event listener when there's no image
+            imagePreview.removeEventListener('click', () => {
+                uploadInput.click();
+            });
+
+            isEventListenerAdded = false;
+        }
+    });
+
+    uploadInput.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+</script>
