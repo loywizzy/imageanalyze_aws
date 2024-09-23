@@ -125,7 +125,7 @@ def draw_text_with_outline(draw, position, text, font, text_color="white", outli
 
 # ฟังก์ชันตรวจจับข้อความและวาด Bounding Box
 def detect_text_and_draw_bounding_box(photo, bucket):
-    session = boto3.Session(profile_name='default')
+    session = boto3.Session()
     client = session.client('rekognition')
 
     response = client.detect_text(Image={'S3Object': {'Bucket': bucket, 'Name': photo}})
