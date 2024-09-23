@@ -261,7 +261,7 @@ def services():
 
     return redirect(url_for('display_image', image_file=f'output_with_labels_{file.filename}'))
 
-@app.route('/', methods=['POST'])
+@app.route('/', methods=['POST']) 
 def upload_image():
     if 'file' not in request.files:
         return 'No file part'
