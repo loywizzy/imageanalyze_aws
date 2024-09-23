@@ -143,7 +143,7 @@ def detect_text_and_draw_bounding_box(photo, bucket):
 
     # กำหนดฟอนต์และขนาดตัวอักษร
     font_size = 20  # ปรับขนาดตามต้องการ
-    font = ImageFont.truetype("arial.ttf", font_size)
+    font = ImageFont.truetype("static/fonts/Arial.ttf", font_size)
 
     # วาด Bounding Box สำหรับข้อความที่ตรวจจับได้
     for text in response['TextDetections']:
@@ -244,7 +244,8 @@ def services():
 
     # ใช้ฟอนต์และขนาด
     font_size = 80
-    font = ImageFont.truetype("arial.ttf", font_size)
+    font = ImageFont.truetype("static/fonts/Arial.ttf", font_size)
+
 
     # วาด label บนภาพ
     for index, label in enumerate(labels):
@@ -284,7 +285,7 @@ def upload_image():
     # คำนวณขนาดตัวอักษรที่เหมาะสม
     base_font_size = min(img_width, img_height) // 30
     font_size = max(12, min(base_font_size, 60))  # ขนาดตัวอักษรอยู่ระหว่าง 12 ถึง 60
-    font = ImageFont.truetype("arial.ttf", font_size)
+    font = ImageFont.truetype("static/fonts/Arial.ttf", font_size)
 
     # คำนวณพื้นที่สำหรับเขียน label
     max_labels = 10
@@ -324,5 +325,4 @@ def detect_text_page():
     return render_template('detect_text.html')
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))  # ใช้พอร์ตที่ Render ให้ หรือพอร์ต 5000 ถ้าไม่ได้กำหนด
-    app.run(host='0.0.0.0', port=port)
+    app.run(debug=True)
