@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for 
+from flask import Flask, render_template, request, redirect, url_for
 import boto3 , os
 from PIL import Image, ImageDraw, ImageFont
 
@@ -324,4 +324,5 @@ def detect_text_page():
     return render_template('detect_text.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))  # ใช้พอร์ตที่ Render ให้ หรือพอร์ต 5000 ถ้าไม่ได้กำหนด
+    app.run(host='0.0.0.0', port=port)
