@@ -7,7 +7,7 @@ bucket_name = 'imageanalysisy'
 
 # สร้าง client สำหรับ S3 และ Rekognition
 s3 = boto3.client('s3')
-rekognition = boto3.client('rekognition')
+rekognition = boto3.client('rekognition', region_name='ap-southeast-2')
 
 # ฟังก์ชันสำหรับวิเคราะห์ label ในภาพ
 def detect_labels(photo, bucket):
